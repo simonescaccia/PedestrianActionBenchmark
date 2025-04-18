@@ -12,7 +12,6 @@ from action_predict import action_prediction
 from action_predict import ActionPredict
 #from new_model import NewModel, HybridModel, MultiRNN3D, MultiRNN3D_MATT
 
-from jaad_data import JAAD
 from pie_data import PIE
 
 

@@ -1,5 +1,5 @@
-#FROM tensorflow/tensorflow:2.1.0-gpu-py3
-FROM tensorflow/tensorflow:latest-gpu
+FROM tensorflow/tensorflow:2.1.0-gpu-py3
+#FROM tensorflow/tensorflow:latest-gpu
 
 ENV NVIDIA_VISIBLE_DEVICES\
 	${NVIDIA_VISIBLE_DEVICES:-all}
@@ -9,22 +9,30 @@ ENV NVIDIA_DRIVER_CAPABILITIES\
 
 SHELL ["/bin/bash", "-c"]
 
+# Only needed for Ubuntu 18.04
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub 
+
 EXPOSE 6006 6007 6008
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update&& apt-get install -y -q graphviz libgraphviz-dev \
 	vim \
 	gosu \
-	python-opencv \
+	python3-opencv \
 	g++ \
-	python-matplotlib \
+	python3-matplotlib \
 	gedit \
 	curl \
 	unzip \
 	git \
 	wget \
-	python-yaml \
+	python3-yaml \
 	libcanberra-gtk-module \	
- 	libcanberra-gtk3-module
+ 	libcanberra-gtk3-module \
+ 	build-essential \
+ 	python3-dev \
+ 	libsqlite3-dev
+
+RUN pip install --upgrade pip
 
 COPY requirements.txt /
 RUN pip3 install -r ./requirements.txt

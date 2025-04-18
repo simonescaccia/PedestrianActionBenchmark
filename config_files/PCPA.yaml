@@ -11,7 +11,7 @@ net_opts:
   cell_type: gru
   backbone: c3d
 exp_opts:
-  datasets: [pie, jaad_all, jaad_beh]
+  datasets: [pie]
   batch_size: [8, 8, 8]
   epochs: [80, 20, 20]
   lr: [1.0e-06, 5.0e-05, 5.0e-05]

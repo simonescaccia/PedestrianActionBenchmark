@@ -11,16 +11,15 @@ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 # Provide full path to PIE and JAAD datasets (videos should be 
 # first converted to images)
 
-PIE_DATA=/media/yulia/Storage1/PIE/ 	# e.g. /home/user/PIE/
-JAAD_DATA=/media/yulia/Storage1/JAAD/
+PIE_DATA="/media/simone/TOSHIBA EXT/PIE/" 	# e.g. /home/user/PIE/
 
 # Provide full path to where the trained models would be stored.
 
-MODELS=/media/yulia/Storage2/models/ # e.g. /home/user/Ped_Cross_Benchmark/models/
+MODELS=/home/simone/Documents/PedestrianActionBenchmark/models/ # e.g. /home/user/Ped_Cross_Benchmark/models/
 
 # Provide full path to Ped_Cross_Benchmark folder
 
-CODE_FOLDER=/home/yulia/Documents/Ped_Cross_Benchmark/ # e.g. /home/user/Ped_Cross_Benchmark/
+CODE_FOLDER=/home/simone/Documents/PedestrianActionBenchmark/ # e.g. /home/user/Ped_Cross_Benchmark/
 
 
 ###################################################################
@@ -41,7 +40,7 @@ DOCKER_TEMP=$HOME/dockers/docker_temp
 WORKING_DIR=$(dirname "$(readlink -f "${BASH_SOURCE}")")/..
 
 # gpu and memory limit
-GPU_DEVICE=1
+GPU_DEVICE=0
 MEMORY_LIMIT=32g
 
 # options
@@ -110,16 +109,13 @@ if [ ! -d ${CODE_FOLDER}/data/features/ ]; then
 	mkdir -p ${CODE_FOLDER}/data/features/
 fi
 
-
 docker run --rm -it --gpus "device=${GPU_DEVICE}"  \
-	--mount type=bind,source=${CODE_FOLDER},target=$WORKING_DIR \
+	--mount type=bind,source=$CODE_FOLDER,target=$WORKING_DIR \
 	--mount type=bind,source=$HOME/.cache/,target=/.cache \
 	--mount type=bind,source=$HOME/.keras,target=/tmp/.keras \
-	--mount type=bind,source=$PIE_DATA,target=$HOME/data/PIE \
-	--mount type=bind,source=$JAAD_DATA,target=$HOME/data/JAAD \
+	--mount type=bind,source="$PIE_DATA",target=$HOME/data/PIE \
 	--mount type=bind,source=$MODELS,target=${CODE_FOLDER}/data/models/ \
 	-e PIE_PATH=$HOME/data/PIE \
-	-e JAAD_PATH=$HOME/data/JAAD \
 	-m ${MEMORY_LIMIT} \
 	-w ${WORKING_DIR} \
 	-e log=/home/log.txt \
