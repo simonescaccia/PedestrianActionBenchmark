@@ -2,7 +2,6 @@ Pillow
 PyYAML
 scikit-image
 scikit-learn
-sklearn
 tqdm
 opencv-python
 wget

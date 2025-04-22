@@ -1,6 +1,5 @@
 from action_predict import action_prediction
 from pie_data import PIE
-from jaad_data import JAAD
 import os
 import sys
 import yaml

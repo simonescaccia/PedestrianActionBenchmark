@@ -14,7 +14,7 @@ net_opts:
   cell_type: gru
   backbone: vgg16
 exp_opts:
-  datasets: [pie, jaad_all, jaad_beh]
+  datasets: [pie]
   batch_size: [16, 16, 16]
   epochs: [60, 40, 40]
   lr: [0.0000005, 0.0000005, 0.0000005]
