@@ -17,15 +17,15 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update&& apt-get install -y -q graphviz libgraphviz-dev \
 	vim \
 	gosu \
-	python-opencv \
+	python3-opencv \
 	g++ \
-	python-matplotlib \
+	python3-matplotlib \
 	gedit \
 	curl \
 	unzip \
 	git \
 	wget \
-	python-yaml \
+	python3-yaml \
 	libcanberra-gtk-module \	
  	libcanberra-gtk3-module \
  	build-essential \

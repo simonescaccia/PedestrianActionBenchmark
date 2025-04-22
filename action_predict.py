@@ -138,6 +138,8 @@ class ActionPredict(object):
                             img_features = cv2.flip(img_features, 1)
                     else:
                         img_data = cv2.imread(imp)
+                        if img_data is None:
+                            print('imp error: {}'.format(imp))
                         if flip_image:
                             img_data = cv2.flip(img_data, 1)
                         if crop_type == 'bbox':
@@ -750,7 +752,7 @@ class ActionPredict(object):
 
         # Train the model
         class_w = self.class_weights(model_opts['apply_class_weights'], data_train['count'])
-        optimizer = self.get_optimizer(optimizer)(lr=lr)
+        optimizer = self.get_optimizer(optimizer)(learning_rate=lr)
         train_model.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
         callbacks = self.get_callbacks(learning_scheduler, model_path)
